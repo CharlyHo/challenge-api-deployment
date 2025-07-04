@@ -1,7 +1,5 @@
-import matplotlib
 from preprocessing.data_cleanner import DataCleanner
 
-matplotlib.use('TkAgg')
 
 # Initialization and data cleaning
 cleaner = DataCleanner("data/immoweb-dataset.csv")
