@@ -26,6 +26,12 @@ class PropertyInput(BaseModel):
     parking: Optional[bool] = False
     epcScore: Optional[int] = 5
 
+
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to my FastAPI app!"}
+
 @app.post("/predict")
 def predict_price(data: PropertyInput):
     input_dict = {
