@@ -13,3 +13,7 @@ To activate it : .\deployment_venv\Scripts\Activate
 - Create API
 - Model on Docker
 - 
+
+
+pyhton .\predict\prediction.py
+uvicorn app1:app --reload
