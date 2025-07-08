@@ -1,0 +1,28 @@
+# Ignore Python virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Ignore VSCode config (facultatif)
+.vscode/
+
+# Ignore data files (si tu veux)
+*.csv
+*.tsv
+
+# Ignore models
+*.pkl
+*.joblib
+*.h5
+
+# Ignore OS metadata
+.DS_Store
+Thumbs.db

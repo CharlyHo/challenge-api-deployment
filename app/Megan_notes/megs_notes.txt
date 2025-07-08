@@ -1,0 +1,19 @@
+*Workspace*
+
+virtualenv -- deployment_venv
+To activate it : .\deployment_venv\Scripts\Activate
+
+*Work structure*
+
+- Data scraping
+- Data cleaning
+- Testing / fine tuning hyperparameters of ML
+- Fix final model with joblib
+
+- Create API
+- Model on Docker
+- 
+
+
+pyhton .\predict\prediction.py
+uvicorn app1:app --reload
