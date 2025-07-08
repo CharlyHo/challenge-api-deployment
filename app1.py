@@ -57,3 +57,5 @@ def predict_price(data: PropertyInput):
     }
     price = predict(input_dict)
     return {"predicted_price": price}
+
+

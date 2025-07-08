@@ -1,7 +1,12 @@
 import streamlit as st
 from predict.prediction import predict
+import os
+
 
 st.set_page_config(page_title="🏠 Real Estate Valuation", layout="centered")
+
+
+
 
 st.title("📊 Real estate price predictor")
 st.markdown("Fill in the information below to estimate the **sale price of a property**.")
