@@ -12,4 +12,7 @@ To activate it : .\deployment_venv\Scripts\Activate
 
 - Create API
 - Model on Docker
-- 
+
+
+
+- Before creating the API -- Defining the values and types for each criteria.

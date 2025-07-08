@@ -86,7 +86,7 @@ flood_zone_types = {
 
 kitchen_types = {
     -1: "Unknow",
-    0: 'NOT_INSTALLED,
+    0: 'NOT_INSTALLED',
     1: 'SEMI_EQUIPPED',
     2: 'INSTALLED',
     3: 'HYPER_EQUIPPED'
@@ -104,8 +104,8 @@ def predict(input_data: Dict[str, Any]) -> float:
     processed_data = {
         "type": [property_type.get(input_data["property-type"])],
         "subtype": [subtype_map.get(input_data["subtype of property"])],
-        "bedroomCount": [input_data["rooms-number"]],
-        "postCode": [str(input_data["postCode"])],  # province extraction
+        "bedroomCount": [input_data["bedroomCount"]],
+        "postCode": [str(input_data["postCode"])],
         "habitableSurface": [input_data["area"]],
         "landArea": [input_data.get("land-area", 0)],
         "gardenSurface": [input_data.get("garden-area", 0)],
