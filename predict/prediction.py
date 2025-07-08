@@ -1,10 +1,9 @@
-
 import joblib
 import pandas as pd
 from typing import Dict, Any
 
 # Load model
-model = joblib.load("model/poly_model.pkl")
+model = joblib.load("Project/challenge-api-deployment/model/best_model.pkl")
 
 # Map text columns with the same encodings as in training
 
@@ -86,7 +85,7 @@ flood_zone_types = {
 
 kitchen_types = {
     -1: "Unknow",
-    0: 'NOT_INSTALLED,
+    0: 'NOT_INSTALLED',
     1: 'SEMI_EQUIPPED',
     2: 'INSTALLED',
     3: 'HYPER_EQUIPPED'
@@ -142,10 +141,7 @@ def predict(input_data: Dict[str, Any]) -> float:
         "hasParking": [int(bool(input_data.get("parking", False)))],
         "epc_score": [int(bool(input_data.get("terrace", False)))],
         "building_condition": [input_data["building condition"]],
-        "kitchen_types": [input_data.get["kitchen type"]]
-    }
-
-
+        "kitchen_types": [input_data.get["kitchen type"]],
         "building_condition": [input_data["building condition"]]
     }
 
