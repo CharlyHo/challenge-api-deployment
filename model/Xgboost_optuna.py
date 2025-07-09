@@ -13,7 +13,7 @@ import joblib
 warnings.filterwarnings('ignore')
 
 class HousePricePredictor:
-    def __init__(self, csv_file_path, save_path="best_model.pkl"):
+    def __init__(self, csv_file_path, save_path="model/best_model.pkl"):
         """
         Initialize the predictor with data from CSV file
         """
