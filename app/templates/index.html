@@ -19,20 +19,21 @@
         <label>Living Area (m²):</label>
         <input type="number" name="area" required>
 
-        <label>Property Type:</label>
-        <input type="number" name="rooms_number" required>
+        <label>Property Type:
+            <select name="property_type" id="property_type" required onchange="SubtypeOptions()">
+                <option value="HOUSE">Maison</option>
+                <option value="APARTMENT">Appartement</option>
+            </select>
+        </label><br>
 
-        <label>Property Subtype:</label>
-        <select name="subtype_of_property" required>
-            <option value="APARTMENT">Apartment</option>
-            <option value="HOUSE">House</option>
-            <option value="VILLA">Villa</option>
-            <option value="STUDIO">Studio</option>
-            <option value="DUPLEX">Duplex</option>
-        </select>
+        <label>Subtype of property:
+            <select name="subtype_of_property" id="subtype_of_property" required>
+                <option value="">-- Sélectionnez d'abord le type de bien --</option>
+            </select>
+        </label><br>
 
         <label>Number of Rooms:</label>
-        <input type="number" name="rooms_number" required>
+        <input type="number" name="rooms_number">
 
         <label>Zip Code:</label>
         <input type="text" name="zip_code" required>
@@ -128,3 +129,33 @@
     {% endif %}
 </body>
 </html>
+
+
+<script>
+
+    const subtypeOptions = {
+        "HOUSE": ["HOUSE", "VILLA"],
+        "APARTMENT": ["APARTMENT", "STUDIO", "DUPLEX", "PENTHOUSE"]
+    };
+
+        function SubtypeOptions() {
+        const propertyType = document.getElementById("property_type").value;
+        const subtypeSelect = document.getElementById("subtype_of_property");
+    
+        subtypeSelect.innerHTML = '';
+
+         if (propertyType && subtypeOptions[propertyType]) {
+            subtypeOptions[propertyType].forEach(function(subtype) {
+                const option = document.createElement("option");
+                option.value = subtype;
+                option.text = subtype;
+                subtypeSelect.appendChild(option);
+            });
+        } else {
+            const option = document.createElement("option");
+            option.value = "";
+            option.text = "-- Sélectionnez d'abord le type de bien --";
+            subtypeSelect.appendChild(option);
+        }
+    }
+</script>

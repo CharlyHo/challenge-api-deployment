@@ -40,30 +40,40 @@ def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@app.post("/predict", response_class=HTMLResponse)
-def predict_price(
-    request: Request,
-    area: int = Form(...),
-    property_type: str = Form(...),
-    subtype_of_property: str = Form(...),
-    rooms_number: int = Form(...),
-    zip_code: str = Form(...),
-    land_area: Optional[int] = Form(0),
-    garden: Optional[bool] = Form(False),
-    garden_area: Optional[int] = Form(0),
-    full_address: Optional[str] = Form(None),
-    swimming_pool: Optional[bool] = Form(False),
-    open_fire: Optional[bool] = Form(False),
-    terrace: Optional[bool] = Form(False),
-    terrace_area: Optional[int] = Form(0),
-    facades_number: Optional[int] = Form(None),
-    building_condition: Optional[str] = Form(None),
-    parking: Optional[bool] = Form(False),
-    epcScore: Optional[str] = Form(None),
-    heating_type: Optional[str] = Form(None),
-    flood_zone_type: Optional[str] = Form(None),
-    kitchen_types: Optional[str] = Form(None)
-):
+@app.post("/predict")
+async def predict(request: Request):
+    form = await request.form()
+
+    area = float(form.get("area"))
+    property_type = form.get("property_type")
+    subtype_of_property = form.get("subtype_of_property")
+    rooms_number = int(form.get("rooms_number"))
+    zip_code = form.get("zip_code")
+    land_area = form.get("land_area")
+    land_area = float(land_area) if land_area else None
+
+    garden = form.get("garden") == "true"
+    garden_area = form.get("garden_area")
+    garden_area = float(garden_area) if garden_area else None
+
+    full_address = form.get("full_address")
+    swimming_pool = form.get("swimming_pool") == "true"
+    open_fire = form.get("open_fire") == "true"
+    terrace = form.get("terrace") == "true"
+    terrace_area = form.get("terrace_area")
+    terrace_area = float(terrace_area) if terrace_area else None
+
+    facades_number = form.get("facades_number")
+    facades_number = int(facades_number) if facades_number else None
+
+    building_condition = form.get("building_condition")
+    parking = form.get("parking") == "true"
+    epc_score = form.get("epcScore")
+    epc_score = int(epc_score) if epc_score else None
+
+    heating_type = form.get("heating_type")
+    flood_zone_type = form.get("flood_zone_type")
+    kitchen_types = form.get("kitchen_types")
 
     input_dict = {
         "area": data.area,
@@ -89,5 +99,5 @@ def predict_price(
     }
 
     price = predict(input_dict)
-    return templates.TemplateResponse("index.html", {"request": request, "prediction": price})
+    return templates.TemplateResponse("index.html", {"request": request, "prediction": prediction})
     return {"predicted_price": price}
