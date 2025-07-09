@@ -21,13 +21,13 @@
     </p>
 
     <form method="post" action="/predict">
-        <label>Living Area (m²):</label>
+        <label>Living Area (m²):*</label>
         <input type="number" name="area" required>
 
         <label>Property Type:*
             <select name="property_type" id="property_type" required onchange="UpdateSubtypeOptions()">
-                <option value="HOUSE">HOUSE</option>
-                <option value="APARTMENT">APARTMENT</option>
+                <option value=1>HOUSE</option>
+                <option value=2>APARTMENT</option>
             </select>
         </label><br>
 
@@ -41,7 +41,7 @@
         <input type="number" name="rooms_number" required>
 
         <label>Zip Code:*</label>
-        <input type="text" name="zip_code" required>
+        <input type="number" name="zip_code" required>
 
         <label>Land Area (m²):</label>
         <input type="number" name="land_area">
@@ -84,12 +84,13 @@
 
         <label>Building Condition:</label>
             <select name="building_condition">
-                <option value="GOOD">Good</option>
-                <option value="AS NEW">As New</option>
-                <option value="TO RENOVATE">To Renovate</option>
-                <option value="TO BE DONE UP">To Be Done Up</option>
-                <option value="JUST RENOVATED">Just Renovated</option>
-                <option value="TO RESTORE">To Restore</option>
+                <option value="1">Good</option>
+                <option value="2">As New</option>
+                <option value="3">To Renovate</option>
+                <option value="4">To Be Done Up</option>
+                <option value="5">Just Renovated</option>
+                <option value="6">To Restore</option>
+                <option value="-1">Unknown</option>
             </select>
 
         <label>Parking:</label>
@@ -104,11 +105,12 @@
                 <option value="2">A+</option>
                 <option value="3">A</option>
                 <option value="4">B</option>
-                <option value="5" selected>C</option>
+                <option value="5">C</option>
                 <option value="6">D</option>
                 <option value="7">E</option>
                 <option value="8">F</option>
                 <option value="9">G</option>
+                <option value="-1">Unknow</option>
             </select>
 
             <div id="epcColorBox" style="margin-top:10px; padding:10px; border-radius:4px; text-align:center;">
@@ -117,25 +119,30 @@
 
         <label>Heating Type:</label>
             <select name="heating_type">
-                <option value="GAS">Gas</option>
-                <option value="ELECTRIC">Electric</option>
-                <option value="WOOD">Wood</option>
-                <option value="FUELOIL">Fuel Oil</option>
+                <option value="1">Gas</option>
+                <option value="3">Electric</option>
+                <option value="5">Wood</option>
+                <option value="2">Fuel Oil</option>
+                <option value="4">Pellet</option>
+                <option value="6">Solar</option>
+                <option value="7">Carbon</option>
+                <option value=" -1">Unknown</option>
             </select>
 
         <label>Flood Zone:</label>
             <select name="flood_zone_type">
-                <option value="NON FLOOD ZONE">Non Flood Zone</option>
-                <option value="POSSIBLE FLOOD ZONE">Possible Flood Zone</option>
-                <option value="RECOGNIZED FLOOD ZONE">Recognized Flood Zone</option>
+                <option value="1">Non Flood Zone</option>
+                <option value="2">Possible Flood Zone</option>
+                <option value="3">Recognized Flood Zone</option>
+                <option value="-1">Unknown</option>
             </select>
 
         <label>Kitchen Type:</label>
             <select name="kitchen_types">
-                <option value="NOT_INSTALLED">Not Installed</option>
-                <option value="SEMI_EQUIPPED">Semi-equipped</option>
-                <option value="INSTALLED">Installed</option>
-                <option value="HYPER_EQUIPPED">Hyper-equipped</option>
+                <option value="0D">Not Installed</option>
+                <option value="1">Semi-equipped</option>
+                <option value="2">Installed</option>
+                <option value="3">Hyper-equipped</option>
             </select>
 
         <button type="submit">Estimate Price</button>
@@ -153,8 +160,8 @@
 <script>
 
     const subtypeOptions = {
-        "HOUSE": ["HOUSE", "VILLA"],
-        "APARTMENT": ["APARTMENT", "STUDIO", "DUPLEX", "PENTHOUSE"]
+        "1": ["HOUSE", "VILLA"],
+        "2": ["APARTMENT", "STUDIO", "DUPLEX", "PENTHOUSE"]
     };
 
         function UpdateSubtypeOptions() {
@@ -173,7 +180,7 @@
         } else {
             const option = document.createElement("option");
             option.value = "";
-            option.text = "-- Sélectionnez d'abord le type de bien --";
+            option.text = "-- Please, select the property type first --";
             subtypeSelect.appendChild(option);
         }
     }
@@ -188,7 +195,8 @@
             6: {color: '#FFA500', label: 'D'},
             7: {color: '#FF8C00', label: 'E'},
             8: {color: '#FF4500', label: 'F'},
-            9: {color: '#B22222', label: 'G'}
+            9: {color: '#B22222', label: 'G'},
+            None: {color: '#808080', label: 'Unknown'}
         };
         const select = document.getElementById('epcScore');
         const selected = epcColors[select.value];
