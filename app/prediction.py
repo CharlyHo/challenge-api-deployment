@@ -4,7 +4,7 @@ import pandas as pd
 from typing import Dict, Any
 
 # Load model
-model = joblib.load("model/best_model.pkl")
+model = joblib.load("best_model.pkl")
 
 # Map text columns with the same encodings as in training
 
