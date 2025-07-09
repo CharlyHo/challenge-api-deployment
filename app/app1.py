@@ -27,6 +27,10 @@ class PropertyInput(BaseModel):
     flood_zone_type: int
     kitchen_types: int  
 
+@app.get("/")
+def index():
+    return {"Welcome to our website!"}
+
 @app.post("/predict")
 def predict_price(data: PropertyInput):
     input_dict = {
