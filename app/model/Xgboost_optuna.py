@@ -6,14 +6,12 @@ import os
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.preprocessing import StandardScaler
-import matplotlib.pyplot as plt
-import seaborn as sns
 import warnings
 import joblib
 warnings.filterwarnings('ignore')
 
 class HousePricePredictor:
-    def __init__(self, csv_file_path, save_path="model/best_model.pkl"):
+    def __init__(self, csv_file_path, save_path="app/best_model.pkl"):
         """
         Initialize the predictor with data from CSV file
         """
@@ -81,7 +79,7 @@ class HousePricePredictor:
         # using model as .joblib if existing
         if os.path.exists(self.save_path):
             print(f"[SKIP] Model file already exists at '{self.save_path}'. Skipping training.")
-            self.model = joblib.load(self.save_path)
+            self.best_model = joblib.load(self.save_path)
             return 
         
         """
@@ -231,8 +229,9 @@ def main():
 
     # Saving model
     predictor.save()
-    
+
 
 if __name__ == "__main__":
-   main()
+    main()
+
 
