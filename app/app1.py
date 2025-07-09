@@ -31,7 +31,7 @@ class PropertyInput(BaseModel):
 def index():
     return {"Welcome to our website!"}
 
-@app.get("/predict")
+@app.post("/predict")
 def predict_price(data: PropertyInput):
     input_dict = {
         "area": data.area,
