@@ -7,10 +7,10 @@ app = FastAPI()
 
 class PropertyInput(BaseModel):
     area: int
-    property_type: int
-    subtype_of_property: int
+    property_type: str
+    subtype_of_property: str
     rooms_number: int
-    zip_code: int
+    zip_code: str
     land_area: Optional[int] = 0
     garden: Optional[bool] = False
     garden_area: Optional[int] = 0
@@ -20,12 +20,12 @@ class PropertyInput(BaseModel):
     terrace: Optional[bool] = False
     terrace_area: Optional[int] = 0
     facades_number: Optional[int] = None
-    building_condition: int
+    building_condition: str
     parking: Optional[bool] = False
-    epcScore: int
-    heating_type: int  
-    flood_zone_type: int
-    kitchen_types: int  
+    epcScore: Optional[str]
+    heating_type: Optional[str]  
+    flood_zone_type: Optional[str]
+    kitchen_types: Optional[str]  
 
 @app.get("/")
 def index():
