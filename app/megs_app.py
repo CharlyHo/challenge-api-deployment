@@ -7,11 +7,11 @@ app = FastAPI()
 
 
 class Data(BaseModel):
-    type: ""
-    subtype: ""
+    type: str
+    subtype: str
     bedroomCount: int
     bathroomCount: Optional[int] = 0
-    postCode: ""
+    postCode: str
     habitableSurface: int
     roomCount: int
     hasAttic: bool

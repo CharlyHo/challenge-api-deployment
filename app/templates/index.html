@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>How much is my property worth?</title>
+</head>
+<body>
+    <h1>Check the value of your property easily</h1>
+
+    {% if prediction %}
+        <h2>Predicted price : {{ prediction }}</h2>
+    {% endif %}
+
+    <form method="post" action="/predict">
+        <label>Surface (m²): <input type="number" name="area" required></label><br>
+        <label>Type of property: <input type="text" name="property_type" required></label><br>
+            <select name="property_type" required>
+                <option value="house">House</option>
+                <option value="apartment">Apartement</option>
+            </select>
+        </label><br>
+        <label>Subtype: <input type="text" name="subtype_of_property" required></label><br>
+        <label>Number of bedrooms: <input type="number" name="rooms_number" required></label><br>
+        <label>Postal code: <input type="text" name="zip_code" required></label><br>
+
+        <button type="submit">What is the value of my property?</button>
+    </form>
+</body>
+</html>
