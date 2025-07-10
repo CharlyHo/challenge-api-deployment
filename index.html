@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Property Price Estimation</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        form { max-width: 600px; margin: auto; }
+        label { display: block; margin-top: 12px; }
+        input, select { width: 100%; padding: 8px; margin-top: 4px; }
+        button { margin-top: 20px; padding: 10px 15px; cursor: pointer; }
+        .result { margin-top: 30px; font-size: 18px; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>🏡 Property Price Estimator</h1>
+
+    <form method="post" action="/predict">
+        <label>Living Area (m²):</label>
+        <input type="number" name="area" required>
+
+        <label>Property Type:</label>
+        <select name="property_type" required>
+            <option value="APARTMENT">Apartment</option>
+            <option value="HOUSE">House</option>
+        </select>
+
+        <label>Property Subtype:</label>
+        <select name="subtype_of_property" required>
+            <option value="APARTMENT">Apartment</option>
+            <option value="HOUSE">House</option>
+            <option value="VILLA">Villa</option>
+            <option value="STUDIO">Studio</option>
+            <option value="DUPLEX">Duplex</option>
+        </select>
+
+        <label>Number of Rooms:</label>
+        <input type="number" name="rooms_number" required>
+
+        <label>Zip Code:</label>
+        <input type="text" name="zip_code" required>
+
+        <label>Land Area (m²):</label>
+        <input type="number" name="land_area">
+
+        <label>Garden:</label>
+        <select name="garden">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+        </select>
+
+        <label>Garden Area (m²):</label>
+        <input type="number" name="garden_area">
+
+        <label>Full Address:</label>
+        <input type="text" name="full_address">
+
+        <label>Swimming Pool:</label>
+        <select name="swimming_pool">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+        </select>
+
+        <label>Open Fire:</label>
+        <select name="open_fire">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+        </select>
+
+        <label>Terrace:</label>
+        <select name="terrace">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+        </select>
+
+        <label>Terrace Area (m²):</label>
+        <input type="number" name="terrace_area">
+
+        <label>Number of Facades:</label>
+        <input type="number" name="facades_number">
+
+        <label>Building Condition:</label>
+        <select name="building_condition">
+            <option value="GOOD">Good</option>
+            <option value="AS NEW">As New</option>
+            <option value="TO RENOVATE">To Renovate</option>
+            <option value="TO BE DONE UP">To Be Done Up</option>
+            <option value="JUST RENOVATED">Just Renovated</option>
+            <option value="TO RESTORE">To Restore</option>
+        </select>
+
+        <label>Parking:</label>
+        <select name="parking">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+        </select>
+
+        <label>EPC Score (1=A++ to 9=G):</label>
+        <input type="number" name="epcScore" min="1" max="9" value="5">
+
+        <label>Heating Type:</label>
+        <select name="heating_type">
+            <option value="GAS">Gas</option>
+            <option value="ELECTRIC">Electric</option>
+            <option value="WOOD">Wood</option>
+            <option value="FUELOIL">Fuel Oil</option>
+        </select>
+
+        <label>Flood Zone:</label>
+        <select name="flood_zone_type">
+            <option value="NON FLOOD ZONE">Non Flood Zone</option>
+            <option value="POSSIBLE FLOOD ZONE">Possible Flood Zone</option>
+            <option value="RECOGNIZED FLOOD ZONE">Recognized Flood Zone</option>
+        </select>
+
+        <label>Kitchen Type:</label>
+        <select name="kitchen_types">
+            <option value="NOT_INSTALLED">Not Installed</option>
+            <option value="SEMI_EQUIPPED">Semi-equipped</option>
+            <option value="INSTALLED">Installed</option>
+            <option value="HYPER_EQUIPPED">Hyper-equipped</option>
+        </select>
+
+        <button type="submit">Estimate Price</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            💰 Estimated Price: <strong>{{ prediction }} €</strong>
+        </div>
+    {% endif %}
+</body>
+</html>
