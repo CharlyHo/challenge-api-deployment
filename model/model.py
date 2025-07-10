@@ -14,7 +14,7 @@ class PolyModel:
     This class create a polynomial model, train and save it
     """
 
-    def __init__(self, save_path="model/poly_model.pkl", degree=2):
+    def __init__(self, save_path="model/best_model.pkl", degree=2):
         self.model = None
         self.degree = degree
         self.save_path = save_path
