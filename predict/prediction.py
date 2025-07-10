@@ -58,7 +58,7 @@ def predict(input_data: Dict[str, Any]) -> float:
         "province_encoded": province_map(input_data["zip-code"]),
         "type_encoded": type_map.get(input_data["property-type"].upper(), 2),
         "subtype_encoded": subtype_map.get(input_data["subtype of property"].upper(), 1),
-        "epcScore_encoded": int(input_data["epcScore"]),
+        "epcScore_encoded": int(input_data["epcScore_encoded"]),
         "hasAttic_encoded": 0,
         "hasGarden_encoded": int(to_bool(input_data.get("garden", False))),
         "hasAirConditioning_encoded": 0,
