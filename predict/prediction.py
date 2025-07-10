@@ -11,8 +11,7 @@ province_map = lambda zip_code: int(str(zip_code)[:2]) if zip_code else 10  # de
 REQUIRED_FIELDS = [
     "area", "property-type", "subtype of property", "rooms-number", "zip-code",
     "land-area", "garden", "garden-area", "terrace", "terrace-area",
-    "parking", "epcScore", "heating type", "flood zone type",
-    "kitchen types"
+    "parking", "epcScore", "heating type", "flood zone type", "kitchen types"
 ]
 
 # Mappings for encoding
@@ -50,11 +49,11 @@ def predict(input_data: Dict[str, Any]) -> float:
 
     df = pd.DataFrame([{
         "bedroomCount": int(input_data["rooms-number"]),
-        "bathroomCount": int(input_data.get("bathroomCount", 1)),
+        "bathroomCount": 1,
         "habitableSurface": float(input_data["area"]),
-        "toiletCount": int(input_data.get("toilet", 1)),
+        "toiletCount": 1,
         "terraceSurface": float(input_data.get("terrace-area", 0)),
-        "postCode": int(input_data["zip-code"]),
+        #"postCode": int(input_data["zip-code"]),
         "gardenSurface": float(input_data.get("garden-area", 0)),
         "province_encoded": province_map(input_data["zip-code"]),
         "type_encoded": type_map.get(input_data["property-type"].upper(), 2),
@@ -78,5 +77,38 @@ def predict(input_data: Dict[str, Any]) -> float:
         "hasLivingRoom_encoded": 1,
     }])
 
+
     predicted_price = model.predict(df)[0]
     return round(predicted_price, 2)
+
+
+# Run a test manually
+if __name__ == "__main__":
+    example_input = {
+        "area": 120,
+        "property-type": "house",
+        "subtype of property": "house",
+        "rooms-number": 3,
+        "zip-code": 1000,
+        "land-area": 300,
+        #"building_condition": 5,
+        "garden": True,
+        "garden-area": 50,
+        "equipped-kitchen": True,
+        "full-address": "boulevard edouard, 1000 laeken",
+        "swimming_pool": False,
+        "furnished": False,
+        "open_fire": True,
+        "terrace": True,
+        "terrace-area": 20,
+        "facades-number": 2,
+        "building_condition": 5,
+        "parking": False,
+        "epcScore": 4,
+        "heating type": 1,
+        "flood zone type": 1,
+        "kitchen types": 3
+    }
+
+    price = predict(example_input)
+    print(f"Predicted price: {price} €")

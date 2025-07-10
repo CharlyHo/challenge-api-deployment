@@ -19,8 +19,8 @@ with st.form("prediction_form"):
             6: "AS_NEW", 5: "GOOD", 4: "JUST RENOVATED", 3: "TO_BE_DONE_UP", 2: "TO_RENOVATE", 1: "TO_RESTORE"
         }[x])
         floodZoneType = st.selectbox("flood zone type", ["NON FLOOD ZONE", "POSSIBLE FLOOD ZONE", "RECOGNIZED FLOOD ZONE"])
-        #building_condition = st.selectbox("building condition", ["GOOD", "AS NEW", "TO RENOVATE", "TO BE DONE UP", 
-        #"JUST RENOVATED", "TO RESTORE"])
+        building_condition = st.selectbox("building condition", ["GOOD", "AS NEW", "TO RENOVATE", "TO BE DONE UP", 
+        "JUST RENOVATED", "TO RESTORE"])
         bathRoom = st.number_input("Bathroom count", min_value=0, step=1)
         toilet = st.number_input("Toilet count", min_value=0, step=1)
 
@@ -47,7 +47,7 @@ if submitted:
         "kitchen types": kitchenType,
         "flood zone type": floodZoneType,
         "heating type": heatingType,
-        #"Building condition": building_condition,
+        "Building condition": building_condition,
         "land-area": land_area,
         "garden": garden_area > 0,
         "garden-area": garden_area,
