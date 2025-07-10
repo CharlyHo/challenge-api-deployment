@@ -3,7 +3,7 @@ import pandas as pd
 from typing import Dict, Any
 
 # Load model
-model = joblib.load("model/best_model.pkl")
+model = joblib.load("best_model.pkl")
 
 # Define encodings
 province_map = lambda zip_code: int(str(zip_code)[:2]) if zip_code else 10  # default province
@@ -54,7 +54,6 @@ def predict(input_data: Dict[str, Any]) -> float:
         "habitableSurface": float(input_data["area"]),
         "toiletCount": 1,
         "terraceSurface": float(input_data.get("terrace-area", 0)),
-        #"postCode": int(input_data["zip-code"]),
         "gardenSurface": float(input_data.get("garden-area", 0)),
         "province_encoded": province_map(input_data["zip-code"]),
         "type_encoded": type_map.get(input_data["property-type"].upper(), 2),
