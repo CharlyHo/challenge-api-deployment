@@ -12,7 +12,7 @@ REQUIRED_FIELDS = [
     "area", "property-type", "subtype of property", "rooms-number", "zip-code",
     "land-area", "garden", "garden-area", "terrace", "terrace-area",
     "parking", "epcScore", "heating type", "flood zone type",
-    "building_condition", "kitchen types"
+    "kitchen types"
 ]
 
 # Mappings for encoding
