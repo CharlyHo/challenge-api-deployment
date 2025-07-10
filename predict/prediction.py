@@ -3,7 +3,7 @@ import pandas as pd
 from typing import Dict, Any
 
 # Load model
-model = joblib.load("best_model.pkl")
+model = joblib.load("model/best_model.pkl")
 
 # Define encodings
 province_map = lambda zip_code: int(str(zip_code)[:2]) if zip_code else 10  # default province
