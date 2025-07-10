@@ -66,27 +66,27 @@ def predict_price(
 ):
 
     input_dict = {
-        "area": data.area,
-        "property-type": data.property_type,
-        "subtype of property": data.subtype_of_property,
-        "rooms-number": data.rooms_number,
-        "zip-code": data.zip_code,
-        "land-area": data.land_area,
-        "garden": data.garden,
-        "garden-area": data.garden_area,
-        "full-address": data.full_address,
-        "swimming-pool": data.swimming_pool,
-        "open-fire": data.open_fire,
-        "terrace": data.terrace,
-        "terrace-area": data.terrace_area,
-        "facades-number": data.facades_number,
-        "building condition": data.building_condition,
-        "parking": data.parking,
-        "epcScore": data.epcScore,
-        "heating type": data.heating_type,
-        "flood zone type": data.flood_zone_type,
-        "kitchen types": data.kitchen_types
-    }
+    "area": area,
+    "property-type": property_type,
+    "subtype of property": subtype_of_property,
+    "rooms-number": rooms_number,
+    "zip-code": zip_code,
+    "land-area": land_area,
+    "garden": garden,
+    "garden-area": garden_area,
+    "full-address": full_address,
+    "swimming_pool": swimming_pool,
+    "open_fire": open_fire,
+    "terrace": terrace,
+    "terrace-area": terrace_area,
+    "facades-number": facades_number,
+    "building_condition": building_condition,
+    "parking": parking,
+    "epcScore": epcScore,
+    "heating type": heating_type,
+    "flood zone type": flood_zone_type,
+    "kitchen types": kitchen_types
+}
 
     price = predict(input_dict)
     return templates.TemplateResponse("index.html", {"request": request, "prediction": price})

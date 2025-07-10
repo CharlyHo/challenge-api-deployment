@@ -12,7 +12,7 @@ REQUIRED_FIELDS = [
     "area", "property-type", "subtype of property", "rooms-number", "zip-code",
     "land-area", "garden", "garden-area", "terrace", "terrace-area",
     "parking", "epcScore", "heating type", "flood zone type",
-    "building_condition", "kitchen types"
+    "kitchen types"
 ]
 
 # Mappings for encoding
@@ -54,7 +54,6 @@ def predict(input_data: Dict[str, Any]) -> float:
         "habitableSurface": float(input_data["area"]),
         "toiletCount": 1,
         "terraceSurface": float(input_data.get("terrace-area", 0)),
-        #"postCode": int(input_data["zip-code"]),
         "gardenSurface": float(input_data.get("garden-area", 0)),
         "province_encoded": province_map(input_data["zip-code"]),
         "type_encoded": type_map.get(input_data["property-type"].upper(), 2),
