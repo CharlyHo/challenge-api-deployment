@@ -14,10 +14,10 @@ templates = Jinja2Templates(directory="templates")
 
 class PropertyInput(BaseModel):
     area: int
-    property_type: str
-    subtype_of_property: str
+    property_type: int
+    subtype_of_property: int
     rooms_number: int
-    zip_code: str
+    zip_code: int
     land_area: Optional[int] = 0
     garden: Optional[bool] = False
     garden_area: Optional[int] = 0
@@ -41,31 +41,59 @@ def index(request: Request):
 
 
 @app.post("/predict", response_class=HTMLResponse)
-def predict_price(
-    request: Request,
-    area: int = Form(...),
-    property_type: str = Form(...),
-    subtype_of_property: str = Form(...),
-    rooms_number: int = Form(...),
-    zip_code: str = Form(...),
-    land_area: Optional[int] = Form(0),
-    garden: Optional[bool] = Form(False),
-    garden_area: Optional[int] = Form(0),
-    full_address: Optional[str] = Form(None),
-    swimming_pool: Optional[bool] = Form(False),
-    open_fire: Optional[bool] = Form(False),
-    terrace: Optional[bool] = Form(False),
-    terrace_area: Optional[int] = Form(0),
-    facades_number: Optional[int] = Form(None),
-    building_condition: Optional[str] = Form(None),
-    parking: Optional[bool] = Form(False),
-    epcScore: Optional[str] = Form(None),
-    heating_type: Optional[str] = Form(None),
-    flood_zone_type: Optional[str] = Form(None),
-    kitchen_types: Optional[str] = Form(None)
-):
+async def predict_view(request: Request):
+    form = await request.form() 
+
+    area = float(form.get("area", 0)),
+    property_type = form.get("property_type"),
+    subtype_of_property = form.get("subtype_of_property"),
+    rooms_number = int(form.get("rooms_number", 0)),
+    zip_code = form.get("zip_code"),
+    land_area = float(form.get("land_area") or 0),
+    garden = form.get("garden") == "true",
+    garden_area = float(form.get("garden_area") or 0),
+    full_address = form.get("full_address"),
+    swimming_pool = form.get("swimming_pool") == "true",
+    open_fire = form.get("open_fire") == "true",
+    terrace = form.get("terrace") == "true",
+    terrace_area = float(form.get("terrace_area") or 0),
+    facades_number = int(form.get("facades_number") or 0),
+    building_condition = form.get("building_condition"),
+    parking = form.get("parking") == "true",
+    epcScore = form.get("epcScore"),
+    heating_type = form.get("heating_type"),
+    flood_zone_type = form.get("flood_zone_type"),
+    kitchen_types = form.get("kitchen_types")
+
+    """area = float(form("area")),
+    property_type = form("property_type"),
+    subtype_of_property = form("subtype_of_property"),
+    rooms_number = int(form("rooms_number")),
+    zip_code = form("zip_code"),
+    land_area = float(form("land_area")) if land_area else None,
+
+    garden = form("garden") == "true",
+    garden_area = float(form("garden_area")) if garden_area else None,
+
+    full_address = form("full_address"),
+    swimming_pool = form("swimming_pool") == "true",
+    open_fire = form("open_fire") == "true",
+    terrace = form("terrace") == "true",
+    terrace_area = float(form("terrace_area")) if terrace_area else None,
+
+    facades_number = int(form("facades_number")) if facades_number else None,
+
+    building_condition = form("building_condition"),
+    parking = form("parking") == "true",
+    epcScore = int(form("epcScore")) if epcScore else None,
+
+    heating_type = form("heating_type"),
+    flood_zone_type = form("flood_zone_type"),
+    kitchen_types = form("kitchen_types")
+"""
 
     input_dict = {
+
     "area": area,
     "property-type": property_type,
     "subtype of property": subtype_of_property,
@@ -88,6 +116,6 @@ def predict_price(
     "kitchen types": kitchen_types
 }
 
+
     price = predict(input_dict)
     return templates.TemplateResponse("index.html", {"request": request, "prediction": price})
-    return {"predicted_price": price}
