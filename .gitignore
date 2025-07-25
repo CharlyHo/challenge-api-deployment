@@ -14,7 +14,7 @@ __pycache__/
 # Ignore VSCode config (facultatif)
 .vscode/
 
-# Ignore data files (si tu veux)
+# Ignore data files
 *.csv
 *.tsv
 
@@ -26,3 +26,26 @@ __pycache__/
 # Ignore OS metadata
 .DS_Store
 Thumbs.db
+
+# Ignore environnement virtuel recréé
+tf-env/
+
+# Fichiers compilés et binaires (souvent générés automatiquement)
+*.pyd
+*.so
+*.dll
+
+# Fichiers d'entêtes C/C++
+*.h
+
+# Fichiers de configuration ou caches
+*.log
+*.tmp
+.cache/
+
+# Ignorer environnement virtuel
+tf-env/
+
+# Ignorer dossiers spécifiques au projet
+projects/02-TheHill/immo_eliza/cleaned/
+projects/02-TheHill/immo_eliza/geojson/
